@@ -47,7 +47,7 @@ class EbayItem(scrapy.Item):
     Tire_Type = scrapy.Field()
     MPN = scrapy.Field()
     page_number = scrapy.Field()
-    Age = scrapy.Field()
+    Age_in_years = scrapy.Field()
     Vintage = scrapy.Field()
     Gear_Change_Mechanism = scrapy.Field()
     UPC = scrapy.Field()

@@ -36,7 +36,7 @@ class ProductItem(Model):
     Brake_Type = StringType(required=False)
     Tire_Type = StringType(required=False)
     MPN = StringType(required=False)
-    Age = StringType(required=False)
+    Age_in_years = StringType(required=False)
     Vintage = StringType(required=False)
     Gear_Change_Mechanism = StringType(required=False)
     UPC = StringType(required=False)
