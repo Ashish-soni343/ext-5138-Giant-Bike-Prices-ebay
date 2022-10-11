@@ -65,7 +65,6 @@ class EbayUsaBicyclesSpider(CrawlSpider):
 
         for i in range(len(specification_u) - 1):
             for j in key_value:
-                t = 0
                 if ":" in specification_u[i + 1] and i >= 3 and specification_u[i+1] == "See all condition definitions":
                     break
 
@@ -73,7 +72,6 @@ class EbayUsaBicyclesSpider(CrawlSpider):
                     item[j.replace(" ", "_").replace(":", "")] = specification_u[i + 1]
                 if "Read more" in specification_u[i] :
                     item["Condition"] = specification_u[i + 1]
-                    t = 1
                 if "Used" in specification_u[i] and len(specification_u[i+1]) == 0:
                     item["Condition"] = "Used"
                 if "Colour" in specification_u[i]:
@@ -86,8 +84,6 @@ class EbayUsaBicyclesSpider(CrawlSpider):
                         item["Age_in_years"] = str((current_year) - int(specification_u[i + 1]))
                 except:
                     item["Age_in_years"] = ""
-                if t == 1:
-                    break
 
         self.record_created_by = self.name
         self.execution_id = "34210"  # environ.get('SHUB_JOBKEY', None)

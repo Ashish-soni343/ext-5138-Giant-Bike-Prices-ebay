@@ -61,24 +61,19 @@ class EbayHongkongBikeSpider(CrawlSpider):
             item[key.replace(" ", "_").replace(":", "")] = ""
 
         item["Age_in_years"] = ""
+        l = []
 
         for i in range(len(specification_u)-1):
-            t = 0
             for j in key_value:
 
                 if ":" in specification_u[i + 1] and i >= 3:
                     break
 
-                if j in specification_u[i]:
+                if j in specification_u[i] and j != "Condition:":
                     item[j.replace(" ", "_").replace(":", "")] = specification_u[i + 1]
                 if '狀況' in specification_u[i]:
                     item["Condition"] = specification_u[i + 1]
-                if '閱讀更多' in specification_u[i]:
-                    item["Condition"] = specification_u[i + 1]
-                    t = 1
-                if "Read more" in specification_u[i]:
-                    item["Condition"] = specification_u[i + 1]
-                    t = 1
+                    l.append(specification_u[i + 1])
                 if "Colour" in specification_u[i]:
                     item["Color"] = specification_u[i + 1]
                 if "二手" in specification_u[i] and len(specification_u[i+1]) == 0:
@@ -92,8 +87,6 @@ class EbayHongkongBikeSpider(CrawlSpider):
                         item["Age_in_years"] = (current_year) - int(specification_u[i + 1])
                 except:
                     item["Age_in_years"] = ""
-                if t == 1:
-                    break
 
 
         self.record_created_by = self.name
@@ -104,6 +97,11 @@ class EbayHongkongBikeSpider(CrawlSpider):
         item["type"] = self.type
         item["title"] = element
         item["currency"] = "AU Dollar"
+        try:
+            if len(l) >= 1:
+                item["Condition"] = l[0]
+        except:
+            pass
 
         if len(response.css("#prcIsum::text").extract()) != 0:
 

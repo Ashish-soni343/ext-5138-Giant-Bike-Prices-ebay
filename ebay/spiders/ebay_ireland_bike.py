@@ -67,10 +67,9 @@ class EbayIrelandBikeSpider(CrawlSpider):
         item["Age_in_years"] = ""
 
         for i in range(len(specification_u)-1):
-            t = 0
             for j in key_value:
 
-                if ":" in specification_u[i + 1] and i >= 2 :
+                if ":" in specification_u[i + 1] and i >= 3 :
                     break
 
                 if j in specification_u[i] and specification_u[i+1] != "See all condition definitions":
@@ -81,8 +80,7 @@ class EbayIrelandBikeSpider(CrawlSpider):
                     item["Condition"] = specification_u[i + 1]
                 if "Read more" in specification_u[i]:
                     item["Condition"] = specification_u[i + 1]
-                    t = 1
-                    l=specification_u[i + 1]
+                    l = specification_u[i + 1]
 
                 if "Used" in specification_u[i] and len(specification_u[i+1]) == 0:
                     item["Condition"] = "Used"
@@ -95,8 +93,7 @@ class EbayIrelandBikeSpider(CrawlSpider):
                         item["Age_in_years"] = (current_year) - int(specification_u[i + 1])
                 except:
                     item["Age_in_years"] = ""
-                if t == 1:
-                    break
+
 
 
 

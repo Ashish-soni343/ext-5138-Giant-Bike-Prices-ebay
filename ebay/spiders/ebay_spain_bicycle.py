@@ -77,10 +77,9 @@ class EbaySpainBicycleSpider(CrawlSpider):
                     item["Color"] = specification_u[i + 1]
                 if 'Más información' in specification_u[i]:
                     item["Condition"] = specification_u[i + 1]
-                    t = 1
                 if "Read more" in specification_u[i]:
                     item["Condition"] = specification_u[i + 1]
-                    t = 1
+
                 if "Usado" in specification_u[i] and len(specification_u[i+1]) == 0:
                     item["Condition"] = "Usado"
 
@@ -92,8 +91,6 @@ class EbaySpainBicycleSpider(CrawlSpider):
                         item["Age_in_years"] = (current_year) - int(specification_u[i + 1])
                 except:
                     item["AAge_in_years"] = ""
-                if t == 1:
-                    break
 
 
         self.record_created_by = self.name
