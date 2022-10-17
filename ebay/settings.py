@@ -14,10 +14,10 @@ NEWSPIDER_MODULE = 'ebay.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'ebay (+http://www.yourdomain.com)'
+USER_AGENT = 'ebay (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -47,7 +47,11 @@ ROBOTSTXT_OBEY = True
 #SPIDER_MIDDLEWARES = {
 #    'ebay.middlewares.EbaySpiderMiddleware': 543,
 #}
-
+DOWNLOADER_MIDDLEWARES = {
+    #'ebay.middlewares.RotateUserAgentMiddleware': 535,
+    #'ebay.middlewares.ShowRequestHeadersMiddleware': 540,
+    'ebay.middlewares.EbayDownloaderMiddleware': 543,
+}
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
@@ -86,3 +90,5 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+#USERAGENTS = [
+    #'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11']

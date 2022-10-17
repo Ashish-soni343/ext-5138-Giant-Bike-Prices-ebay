@@ -49,6 +49,7 @@ class EbayItem(scrapy.Item):
     page_number = scrapy.Field()
     Age_in_years = scrapy.Field()
     Vintage = scrapy.Field()
+    url = scrapy.Field()
     Gear_Change_Mechanism = scrapy.Field()
     UPC = scrapy.Field()
     Frame_Number = scrapy.Field()

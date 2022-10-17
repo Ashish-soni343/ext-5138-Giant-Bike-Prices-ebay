@@ -2,13 +2,19 @@
 #
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-
+import random
 from scrapy import signals
 
 # useful for handling different item types with a single interface
-from itemadapter import is_item, ItemAdapter
-
-
+#from itemadapter import is_item, ItemAdapter
+from .settings import USER_AGENT
+class ShowRequestHeadersMiddleware:
+    def process_request(self, request, spider):
+        print(f"Request Headers:{request.headers}")
+class RotateUserAgentMiddleware:
+    def process_request(self, request, spider):
+        user_agent = random.choice(USER_AGENT)
+        request.headers['User-Agent'] = user_agent
 class EbaySpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
